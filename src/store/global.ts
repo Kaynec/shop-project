@@ -117,50 +117,46 @@ export const useProducts = createGlobalState(
   },
 )
 
-export const useSingleProduct = createGlobalState(
-  (id: string) => {
-    const result = ref<DBProduct>()
-    const fullResult = ref<DocumentReference>()
-    const DB = inject('DB') as Firestore
+export function useSingleProduct(id: string) {
+  const result = ref<DBProduct>()
+  const fullResult = ref<DocumentReference>()
+  const DB = inject('DB') as Firestore
 
-    const isLoading = ref(true)
+  const isLoading = ref(true)
 
-    getDoc(doc(DB, 'product', id)).then((doc) => {
-      isLoading.value = false
-      result.value = { ...doc.data() as DBProduct, id }
-      fullResult.value = doc.ref
-    })
+  getDoc(doc(DB, 'product', id)).then((doc) => {
+    isLoading.value = false
+    result.value = { ...doc.data() as DBProduct, id }
+    fullResult.value = doc.ref
+  })
 
-    // To stop listening to updates, call the unsubscribe function
+  // To stop listening to updates, call the unsubscribe function
 
-    return {
-      result,
-      isLoading,
-      fullResult,
-    }
-  },
-)
+  return {
+    result,
+    isLoading,
+    fullResult,
+  }
+}
 
-export const useSingleAddress = createGlobalState(
-  (id: string) => {
-    const result = ref<DBAddress>()
-    const fullResult = ref<DocumentReference>()
-    const DB = inject('DB') as Firestore
+export function useSingleAddress(id: string) {
+  const result = ref<DBAddress>()
+  const fullResult = ref<DocumentReference>()
+  const DB = inject('DB') as Firestore
 
-    const isLoading = ref(true)
+  const isLoading = ref(true)
 
-    getDoc(doc(DB, 'addres', id)).then((doc) => {
-      isLoading.value = false
-      result.value = { ...doc.data() as DBAddress, id }
-      fullResult.value = doc.ref
-    })
+  getDoc(doc(DB, 'addres', id)).then((doc) => {
+    isLoading.value = false
+    result.value = { ...doc.data() as DBAddress, id }
+    fullResult.value = doc.ref
+  })
 
-    // To stop listening to updates, call the unsubscribe function
+  // To stop listening to updates, call the unsubscribe function
 
-    return {
-      result,
-      isLoading,
-      fullResult,
-    }
-  },
-)
+  return {
+    result,
+    isLoading,
+    fullResult,
+  }
+}

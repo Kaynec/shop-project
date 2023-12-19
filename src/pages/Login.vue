@@ -33,7 +33,7 @@ function onAnimationEnter() {
 </script>
 
 <template>
-  <section ref="el" :class="{ 'pt-25 p-sm': !isExpanded }" class="h-full flex flex-col gap-4 transition-350">
+  <section ref="el" :class="{ 'pt-25 p-sm': !isExpanded }" class="mx-auto h-full max-w-1024px flex flex-col gap-4 transition-350">
     <img
       class="mx-auto max-h-auto max-w-400px w-80% transition-250"
       :class="{ 'mx-auto max-h-150 -translate-y-5': isExpanded }" src="../assets/login.png" alt="login.png" width="500"

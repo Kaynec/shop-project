@@ -23,7 +23,7 @@ const selectedItem = ref(props.items[0])
     </h5>
     <div class="relative mt-1">
       <ListboxButton
-        class="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus-visible:border-indigo-500 sm:text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white/75 focus-visible:ring-offset-orange-300"
+        class="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left text-primary shadow-md focus-visible:border-indigo-500 sm:text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white/75 focus-visible:ring-offset-orange-300"
       >
         <span class="block truncate">{{ selectedItem.name }}</span>
         <span

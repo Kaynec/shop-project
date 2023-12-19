@@ -31,7 +31,7 @@ function signout() {
     <!-- header -->
     <Header label="Account" />
     <!--  -->
-    <div class="flex items-start justify-center gap-4 pb-4 pt-8">
+    <div class="flex items-start justify-start gap-4 px-lg pb-4 pt-8">
       <img :src="currentUser?.photoURL!" width="150" height="150" alt="photoURL" class="aspect-1 b-4 b-gray-3 rounded-full object-cover">
       <div class="mt-4 flex flex-col items-start">
         <h5 class="text-#004B84 font-550">
@@ -47,10 +47,10 @@ function signout() {
     </div>
     <!--  -->
     <div class="z-9 grid mt-2 grow gap-4 overflow-auto px-4 container">
-      <DetailCard v-for="i in 5" :key="i">
+      <!-- <DetailCard v-for="i in 5" :key="i">
         Notification
-      </DetailCard>
-      <DetailCard class="mb-3 text-primary text-white brightness-85 !bg-primary" @click="signout">
+      </DetailCard> -->
+      <DetailCard class="mb-3 max-h-15 text-primary text-white brightness-85 !bg-primary" @click="signout">
         Sign Out
       </DetailCard>
     </div>

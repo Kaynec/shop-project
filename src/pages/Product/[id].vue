@@ -28,10 +28,10 @@ function toggleShowProduct() {
     <div class="pa-xs">
       <Spinner v-if="isLoading" class="col-span-2 min-h-50vh" />
       <div v-else-if="product" :key="product.id" class="rounded bg-white pa-xs shadow-lg">
-        <div class="mx-auto max-w-2xl lg:max-w-7xl lg:px-8 sm:px-6 sm:py-24">
+        <div class="mx-auto max-w-2xl lg:max-w-7xl lg:px-8 sm:px-6">
           <div class="group relative">
             <div class="grid w-full place-content-center overflow-hidden b-2 b-gray-1 rounded-md b-solid p-2 group-hover:opacity-75">
-              <img :src="product.picture" width="75" height="75" alt="Card Image" class="aspect-[16/9] max-h-135 max-w-150 w-full object-cover object-center">
+              <img :src="product.picture" width="250" height="250" alt="Card Image" class="">
             </div>
             <div class="mt-4 flex justify-between">
               <div>

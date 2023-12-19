@@ -110,8 +110,8 @@ function sendPasswordResetLink() {
     <!-- header -->
     <Header label="Edit Profile" class="" :compact="true" />
     <!--  -->
-    <div class="relative grid mx-auto place-content-center !z-[99] -mb-20 -translate-y-50%">
-      <img :src="url ?? currentUser?.photoURL!" width="135" height="135" alt="photoURL" class="aspect-1 b-4 b-gray-3 rounded-full object-cover">
+    <div class="relative grid mx-auto place-content-center !z-[99] -mb-12 -translate-y-30%">
+      <img :src="url ?? currentUser?.photoURL!" width="120" height="120" alt="photoURL" class="aspect-1 b-4 b-gray-3 rounded-full object-cover">
       <button @click="inputRef.click()">
         Change Picture
       </button>

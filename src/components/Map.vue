@@ -57,7 +57,7 @@ async function reverseGeocode(coords: number[]) {
 
 <template>
   <main class="flex-center-row">
-    <p my-2 text-xs>
+    <p class="my-2 text-sm text-primary">
       <spinner v-if="isLoading" />
       {{ displayName }}
     </p>

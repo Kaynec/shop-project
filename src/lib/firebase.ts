@@ -9,6 +9,7 @@ import type { FirebaseApp } from 'firebase/app'
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
+import { getMessaging, getToken } from 'firebase/messaging'
 import { getStorage } from 'firebase/storage'
 import type { App as Application } from 'vue'
 import { useUserState } from '../store/global'
@@ -46,10 +47,18 @@ function initializeAppSetup() {
 initializeAppSetup()
 // initializeApp(firebaseConfig)
 export default {
-  install: (app: Application) => {
+  install: async (vueApp: Application) => {
     const storage = getStorage()
-    app.provide('storage', storage)
+    vueApp.provide('storage', storage)
     const db = getFirestore()
-    app.provide('DB', db)
+    vueApp.provide('DB', db)
+
+    // Initialize Firebase Cloud Messaging and get a reference to the service
+    const messaging = getMessaging(app)
+    await navigator.serviceWorker.register('/firebase-messaging-sw.js')
+    getToken(messaging, { vapidKey: import.meta.env.VITE_APP_FIREBASE_MESSAGE_TOKEN }).then((res) => {
+      console.log(res)
+    })
+    // vueApp.provide('Messaging', messaging)
   },
 }

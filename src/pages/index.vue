@@ -1,7 +1,16 @@
 <script setup lang="ts">
+import { useUserState } from '../store/global';
+
 defineOptions({
   name: 'IndexPage',
 })
+
+const router = useRouter()
+
+const state = useUserState()
+const isAuthenticated = state.isAuthenticated
+if (isAuthenticated.value)
+  router.replace('/HomePage')
 </script>
 
 <template>

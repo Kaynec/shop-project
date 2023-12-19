@@ -54,7 +54,7 @@ async function loginUser() {
 </script>
 
 <template>
-  <div class="mt-auto h-80% max-h-130 flex-1 rounded-t-3rem bg-accent px-lg pt-3xl shadow-lg">
+  <div class="mt-auto h-80% max-h-130 flex-1 rounded-t-3rem bg-accent px-lg pt-3xl shadow-lg dark-bg-gray-8">
     <h4 class="flex items-center justify-between">
       <span>
         Welcome Back!!!

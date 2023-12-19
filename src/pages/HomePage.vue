@@ -8,7 +8,7 @@ setTimeout(() => {
 
 <template>
   <div class="first-content">
-    <ul class="first-text" :class="{ hidden: hideText }">
+    <ul class="first-text text-dark dark:text-white" :class="{ hidden: hideText }">
       <li>W</li>
       <li>E</li>
       <li>L</li>
@@ -46,11 +46,11 @@ setTimeout(() => {
   font-weight: 300;
   font-size: clamp(2.5rem , 2.9rem , 4rem);
 
-  color: black;
   opacity: 1;
   transition: all 2.5s ease;
   margin-right: 25px15px;
   margin-left: 25px15px;
+
 }
 
 .first-text.hidden li {

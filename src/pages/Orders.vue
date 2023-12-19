@@ -47,20 +47,22 @@ function onOkay() {
     <!-- header -->
     <Header label="Orders" />
 
-    <div class="z-9 mt-2 flex grow flex-col gap-4 overflow-auto px-4 container">
+    <div class="z-9 mt-2 flex grow flex-col gap-4 overflow-auto px-4 py-lg container">
       <Spinner v-if="isLoading" />
 
       <div
         v-for="(item, index) in orders" :key="index"
         class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700"
       >
-        <a href="#!">
+        <div class="w-full bg-white">
           <img
-            class="mx-auto max-h-220px w-full border-b-1 border-b-gray-3 rounded-t-lg object-cover"
+            class="mx-auto mt-2 max-w-60 border-b-1 border-b-gray-3 rounded-t-lg object-contain p-lg"
             :src="item.product.picture"
             alt="picture of product"
+            width="300"
+            height="200"
           >
-        </a>
+        </div>
         <div class="p-6">
           <h5
             class="mb-2 text-xl text-neutral-800 font-medium leading-tight dark:text-neutral-50"

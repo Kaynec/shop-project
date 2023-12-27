@@ -3,8 +3,8 @@ import { createGlobalState, useStorage } from '@vueuse/core'
 import type { User } from 'firebase/auth'
 
 import type { DocumentReference, Firestore } from 'firebase/firestore'
-import { collection, doc, getDoc, onSnapshot, query, where } from 'firebase/firestore'
-import type { DBAddress, DBOrder, DBProduct } from '../types'
+import { collection, doc, getDoc, onSnapshot, orderBy, query, where } from 'firebase/firestore'
+import type { DBAddress, DBOrder, DBProduct, Message } from '../types'
 
 export const useUserState = createGlobalState(
   () => {
@@ -104,6 +104,35 @@ export const useProducts = createGlobalState(
         id: doc.id,
         ...doc.data(),
       })) as DBProduct[]
+    })
+
+    // To stop listening to updates, call the unsubscribe function
+
+    onBeforeUnmount(unsubscribe)
+
+    return {
+      results,
+      isLoading,
+    }
+  },
+)
+
+export const useMessages = createGlobalState(
+  () => {
+    const results = ref<Message[]>([])
+    const DB = inject('DB') as Firestore
+    const userId = useUserState().currentUser.value.uid
+
+    const q = query(collection(DB, 'messages'), where('contact', '==', userId), orderBy('createdAt'))
+    const isLoading = ref(true)
+
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      isLoading.value = false
+      results.value = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+
+      })) as Message[]
     })
 
     // To stop listening to updates, call the unsubscribe function

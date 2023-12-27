@@ -1,11 +1,8 @@
 <template>
-  <footer class="bg-secondary sticky bottom-0 z-10 mt-auto max-h-130px min-h-[4.5rem] w-full flex flex items-center justify-between bg-accent px-lg">
-    <!-- <button icon-btn @click="toggleDark()">
-      <div i-carbon-sun dark:i-carbon-moon />
-    </button> -->
+  <footer class="sticky bottom-0 z-10 max-h-130px min-h-[4.5rem] w-full flex flex items-center justify-between bg-accent px-lg !mt-auto bg-secondary">
     <router-link
       class="text-dark dark:text-white"
-      exact-active-class="bg-primary text-white rounded-full"
+      exact-active-class="bg-primary !text-white rounded-full"
       :to="{
         name: '/Product/',
       }"
@@ -16,7 +13,7 @@
     </router-link>
     <router-link
       class="text-dark dark:text-white"
-      exact-active-class="bg-primary text-white rounded-full"
+      exact-active-class="bg-primary !text-white rounded-full"
       :to="{
         name: '/Address',
       }"
@@ -28,7 +25,7 @@
 
     <router-link
       class="text-dark dark:text-white"
-      exact-active-class="bg-primary text-white rounded-full"
+      exact-active-class="bg-primary !text-white rounded-full"
       :to="{
         name: '/HomePage',
       }"
@@ -39,7 +36,7 @@
     </router-link>
     <router-link
       class="text-dark dark:text-white"
-      exact-active-class="bg-primary text-white rounded-full"
+      exact-active-class="bg-primary !text-white rounded-full"
       :to="{
         name: '/Orders',
       }"
@@ -51,7 +48,7 @@
 
     <router-link
       class="text-dark dark:text-white"
-      exact-active-class="bg-primary text-white rounded-full"
+      exact-active-class="bg-primary !text-white rounded-full"
       :to="{
         name: '/Profile',
       }"

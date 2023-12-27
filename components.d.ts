@@ -10,6 +10,7 @@ declare module 'vue' {
     AddProductToOrder: typeof import('./src/components/Product/AddProductToOrder.vue')['default']
     AskForPushNotifications: typeof import('./src/components/AskForPushNotifications.vue')['default']
     CancelOrder: typeof import('./src/components/CancelOrder.vue')['default']
+    ChatMessage: typeof import('./src/components/ChatMessage.vue')['default']
     CloseIcon: typeof import('./src/components/CloseIcon.vue')['default']
     DetailCard: typeof import('./src/components/DetailCard.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']

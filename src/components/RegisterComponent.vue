@@ -48,9 +48,11 @@ async function RegisterUser() {
 
     const user = res.user
 
+    const newImageUrl = `https://ui-avatars.com/api/?name=${displayName.value}`
+
     updateProfile(user, {
       displayName: displayName.value,
-      photoURL: `https://ui-avatars.com/api/?name=${displayName.value}`,
+      photoURL: newImageUrl,
     })
 
     sendEmailVerification(user).then(() => {

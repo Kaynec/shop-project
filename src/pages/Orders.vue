@@ -41,13 +41,13 @@ function onOkay() {
 </script>
 
 <template>
-  <div class="flex flex-col">
+  <div class="flex grow flex-col">
     <!-- This is The Handler For Modal -->
     <CancelOrder v-if="showCancelDialog" v-model="showCancelDialog" @proceed="onOkay" @cancel="onCancel" />
     <!-- header -->
     <Header label="Orders" />
 
-    <div class="z-9 mt-2 flex grow flex-col gap-4 overflow-auto px-4 py-lg container">
+    <div class="z-9 mt-2 flex grow flex-col gap-4 overflow-auto px-4">
       <Spinner v-if="isLoading" />
 
       <div

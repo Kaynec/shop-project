@@ -4,11 +4,13 @@
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
+
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import type { FirebaseApp } from 'firebase/app'
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
-import { getFirestore } from 'firebase/firestore'
+import type { Firestore } from 'firebase/firestore'
+import { doc, getFirestore, serverTimestamp, setDoc } from 'firebase/firestore'
 import { getMessaging, getToken } from 'firebase/messaging'
 import { getStorage } from 'firebase/storage'
 import type { App as Application } from 'vue'
@@ -34,6 +36,24 @@ export function setUserToStore() {
   })
 }
 
+export async function initMessageing(db: Firestore) {
+  const state = useUserState()
+
+  // Initialize Firebase Cloud Messaging and get a reference to the service
+
+  const messaging = getMessaging()
+  await navigator.serviceWorker.register('/firebase-messaging-sw.js')
+  getToken(messaging, { vapidKey: import.meta.env.VITE_APP_FIREBASE_MESSAGE_TOKEN }).then((token) => {
+    setDoc(doc(db, `fcmTokens/${state.currentUser.value.uid}`), {
+      timestamp: serverTimestamp(),
+      token,
+      user: state.currentUser.value.uid,
+    })
+  })
+
+  return messaging
+}
+
 // plugins/i18n.js
 // Initialize Firebase
 let app: FirebaseApp
@@ -53,12 +73,8 @@ export default {
     const db = getFirestore()
     vueApp.provide('DB', db)
 
-    // Initialize Firebase Cloud Messaging and get a reference to the service
-    const messaging = getMessaging(app)
-    await navigator.serviceWorker.register('/firebase-messaging-sw.js')
-    getToken(messaging, { vapidKey: import.meta.env.VITE_APP_FIREBASE_MESSAGE_TOKEN }).then((res) => {
-      console.log(res)
-    })
-    // vueApp.provide('Messaging', messaging)
+    // Only Init When Needed
+    if (Notification.permission === 'granted')
+      await initMessageing(db)
   },
 }

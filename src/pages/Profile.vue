@@ -24,6 +24,12 @@ function signout() {
     router.replace('/')
   })
 }
+
+function goToMessageAdminPage() {
+  router.push({
+    name: '/Chat',
+  })
+}
 </script>
 
 <template>
@@ -46,11 +52,14 @@ function signout() {
       </div>
     </div>
     <!--  -->
-    <div class="z-9 grid mt-2 grow gap-4 overflow-auto px-4 container">
+    <div class="z-9 mt-2 flex grow flex-col gap-4 overflow-auto px-4 container">
       <!-- <DetailCard v-for="i in 5" :key="i">
         Notification
       </DetailCard> -->
-      <DetailCard class="mb-3 max-h-15 text-primary text-white brightness-85 !bg-primary" @click="signout">
+      <DetailCard class="mb-3 max-h-15" @click="goToMessageAdminPage">
+        Message Admin
+      </DetailCard>
+      <DetailCard class="mb-3 max-h-15" @click="signout">
         Sign Out
       </DetailCard>
     </div>

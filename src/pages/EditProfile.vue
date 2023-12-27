@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { useObjectUrl } from '@vueuse/core'
-import { shallowRef } from 'vue'
-
 import { getAuth, sendPasswordResetEmail, updateEmail, updateProfile } from 'firebase/auth'
+import type { Firestore } from 'firebase/firestore'
+import { doc, setDoc } from 'firebase/firestore'
 import type { FirebaseStorage } from 'firebase/storage'
 import { ref as firebaseRef, getDownloadURL, uploadBytes } from 'firebase/storage'
+import { shallowRef } from 'vue'
 import { toast } from 'vue3-toastify'
 import { useUserState } from '../store/global'
 
@@ -13,6 +14,8 @@ defineOptions({
 })
 
 const storage = inject('storage') as FirebaseStorage
+
+const DB = inject('DB') as Firestore
 
 const state = useUserState()
 
@@ -57,6 +60,13 @@ async function updateUserInformation() {
       autoClose: 3000,
       type: 'success',
       position: 'bottom-center',
+    })
+
+    // After it's all done we gonna update the users collection looking for the user
+    setDoc(doc(DB, 'user', user.value.uid), {
+      displayName,
+      email,
+      profilePicture: information.value.photoURL,
     })
   }
   catch (error) {

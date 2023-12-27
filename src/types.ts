@@ -1,8 +1,9 @@
+import type { Timestamp } from 'firebase/firestore'
 import type { App } from 'vue'
 import type {
-RouteRecordRaw,
-Router,
-RouterOptions as VueRouterOptions,
+  RouteRecordRaw,
+  Router,
+  RouterOptions as VueRouterOptions,
 } from 'vue-router'
 
 type PartialKeys<T, Keys extends keyof T> = Omit<T, Keys> &
@@ -119,4 +120,11 @@ export interface Address {
 export interface CreatedAt {
   seconds: number
   nanoseconds: number
+}
+export interface Message {
+  id: string
+  sender: string
+  msg: string
+  contact: string
+  createdAt: Timestamp
 }

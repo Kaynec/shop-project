@@ -1,18 +1,25 @@
 <script setup lang="ts">
+import { useWindowSize } from '@vueuse/core';
 
+const { height } = useWindowSize()
+
+const route = useRoute()
 </script>
 
 <template>
-  <main class="relative mx-auto max-w-1024px min-h-100dvh w-full flex flex-col items-center container">
+  <main
+    class="relative mx-auto max-w-1024px w-full flex flex-col items-center container"
+    :style="`height:${height}px !important`"
+  >
     <router-view
       v-slot="{ Component, route }"
-      class="z-index-1 mx-auto h-full grow container"
+      class="z-1 mx-auto w-full flex grow flex-col pb-sm"
     >
       <transition name="slide-fade" mode="out-in">
         <component :is="Component" :key="route" />
       </transition>
     </router-view>
-    <TheFooter v-show="!$route.meta.dontShowFooter" />
+    <TheFooter v-if="!route.meta.dontShowFooter" />
   </main>
 </template>
 

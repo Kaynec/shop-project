@@ -3,11 +3,23 @@ defineProps<{
   label: string
   compact?: boolean
 }>()
+
+const isDark = useDark({
+  disableTransition: false,
+})
+const toggleDark = useToggle(isDark)
+
+const nav = ref()
+
+defineExpose({
+  ref: nav,
+})
 </script>
 
 <template>
   <nav
-    class="bg-secondary sticky top-0 z-10 max-h-70 min-h-3rem w-full flex items-center justify-between px-sm py-5 dark:b-none"
+    ref="nav"
+    class="sticky top-0 z-10 max-h-70 min-h-3rem w-full flex items-center justify-between px-sm py-5 dark:b-none bg-secondary"
     :class="{ 'max-h-130 min-h-40': compact, 'b-b-4 b-b-gray-3': !compact }"
   >
     <!-- Arrow Left -->
@@ -28,6 +40,8 @@ defineProps<{
       {{ label }}
     </h4>
 
-    <span />
+    <button icon-btn @click="toggleDark()">
+      <div i-carbon-sun dark:i-carbon-moon />
+    </button>
   </nav>
 </template>

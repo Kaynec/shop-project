@@ -24,7 +24,6 @@ export default defineConfig({
 
   plugins: [
 
-    // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
     // https://github.com/posva/unplugin-vue-router
     VueRouter(),
 
@@ -35,6 +34,9 @@ export default defineConfig({
         defineModel: true,
       },
     }),
+    // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
+
+    Layouts(),
 
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
@@ -62,8 +64,6 @@ export default defineConfig({
     // https://github.com/antfu/unocss
     // see uno.config.ts for config
     UnoCSS(),
-
-    Layouts(),
 
     VitePWA({
       registerType: 'autoUpdate',

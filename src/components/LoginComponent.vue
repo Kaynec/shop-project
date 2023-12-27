@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import type { FirebaseError } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { toast } from 'vue3-toastify';
+import type { FirebaseError } from 'firebase/app'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import type { Firestore } from 'firebase/firestore'
+import { doc, setDoc } from 'firebase/firestore'
+import { toast } from 'vue3-toastify'
 
 const emit = defineEmits(['close'])
 const password = ref('')
@@ -15,6 +17,8 @@ const errorMsg = ref('')
 function toggleIsPwd() {
   isPwd.value = !isPwd.value
 }
+
+const DB = inject('DB') as Firestore
 
 async function loginUser() {
   const auth = getAuth()
@@ -32,6 +36,16 @@ async function loginUser() {
       })
       return
     }
+
+    //* * If Everything is okay we check the collection of users and update this value
+    // , the way set doc method works is that if it's there it updates the doc otherwise creates it
+    setDoc(doc(DB, 'user', res.user.uid), {
+      displayName: user.displayName,
+      email: email.value,
+      profilePicture: user.photoURL,
+    })
+    //*
+    //*
 
     const DELAY_FOR_TOAST_TO_SHOW = 2000
 

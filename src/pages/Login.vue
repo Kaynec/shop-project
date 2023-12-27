@@ -54,7 +54,7 @@ function onAnimationEnter() {
 <route lang="yaml">
   meta:
    requiresNotAuth: true
-   layout: loggedIn
+   dontShowFooter: true
  </route>
 
 <style scoped>

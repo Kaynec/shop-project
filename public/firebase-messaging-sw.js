@@ -12,15 +12,12 @@ const firebaseConfig = {
   appId: '1:870784967057:web:8d25a8dcae588237847a30',
   measurementId: 'G-EJVC2Z7X8D',
 }
-
 firebase.initializeApp(firebaseConfig)
 
 // Retrieve firebase messaging
 const messaging = firebase.messaging()
 
 messaging.onBackgroundMessage((payload) => {
-  console.log('Received background message ', payload)
-  // Customize notification here
   const notificationTitle = payload.notification.title
   const notificationOptions = {
     body: payload.notification.body,

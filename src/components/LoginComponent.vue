@@ -4,6 +4,7 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import type { Firestore } from 'firebase/firestore'
 import { doc, setDoc } from 'firebase/firestore'
 import { toast } from 'vue3-toastify'
+import { initMessageing } from '../lib/firebase'
 
 const emit = defineEmits(['close'])
 const password = ref('')
@@ -45,6 +46,7 @@ async function loginUser() {
       profilePicture: user.photoURL,
     })
     //*
+
     //*
 
     const DELAY_FOR_TOAST_TO_SHOW = 2000
@@ -58,6 +60,14 @@ async function loginUser() {
     setTimeout(() => {
       router.push('/HomePage')
     }, DELAY_FOR_TOAST_TO_SHOW)
+
+    /**
+     * Initializes messaging using the provided Firestore database instance.
+     * This should be called early in the application startup to enable
+     * push notifications and other messaging features.
+     */
+
+    initMessageing(DB)
   }
   catch (error) {
     const err = error as FirebaseError

@@ -49,12 +49,5 @@ app.use(firebasePlugin).use(router)
 app.use(OpenLayersMap /* options */)
 // Add a Event Listener For FireBase Auth Session
 setUserToStore()
-//
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/firebase-messaging-sw', { scope: '/' })
-  })
-}
 
 app.mount('#app')

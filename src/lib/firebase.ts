@@ -27,6 +27,9 @@ export const firebaseConfig = {
   measurementId: 'G-EJVC2Z7X8D',
 }
 
+// Initialize Firebase
+let app: FirebaseApp
+
 export function setUserToStore() {
   const auth = getAuth()
 
@@ -36,13 +39,13 @@ export function setUserToStore() {
   })
 }
 
-export async function initMessageing(db: Firestore) {
+export async function firebaseMessagingSetup(db: Firestore) {
   const state = useUserState()
 
   // Initialize Firebase Cloud Messaging and get a reference to the service
 
-  const messaging = getMessaging()
-  await navigator.serviceWorker.register('/firebase-messaging-sw.js')
+  const messaging = getMessaging(app)
+
   getToken(messaging, { vapidKey: import.meta.env.VITE_APP_FIREBASE_MESSAGE_TOKEN }).then((token) => {
     setDoc(doc(db, `fcmTokens/${state.currentUser.value.uid}`), {
       timestamp: serverTimestamp(),
@@ -54,9 +57,17 @@ export async function initMessageing(db: Firestore) {
   return messaging
 }
 
-// plugins/i18n.js
-// Initialize Firebase
-let app: FirebaseApp
+/**
+ * If notification permission is granted and the user is authenticated, initialize messaging with the Firebase database reference.
+ * This will set up push notifications for the authenticated user.
+ */
+
+export async function initMessageing(db: Firestore) {
+  const state = useUserState()
+
+  if (Notification.permission === 'granted' && state.isAuthenticated.value)
+    firebaseMessagingSetup(db)
+}
 
 function initializeAppSetup() {
   if (app)
@@ -65,16 +76,11 @@ function initializeAppSetup() {
   return app
 }
 initializeAppSetup()
-// initializeApp(firebaseConfig)
 export default {
   install: async (vueApp: Application) => {
     const storage = getStorage()
     vueApp.provide('storage', storage)
     const db = getFirestore()
     vueApp.provide('DB', db)
-
-    // Only Init When Needed
-    if (Notification.permission === 'granted')
-      await initMessageing(db)
   },
 }

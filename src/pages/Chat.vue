@@ -26,7 +26,6 @@ const text = ref('')
 const db = inject('DB') as Firestore
 
 const msgContainer = ref()
-const lastDiv = ref()
 
 async function sendMessage() {
   const userId = currentUser.value.uid
@@ -35,6 +34,7 @@ async function sendMessage() {
     msg: text.value,
     sender: 'user',
     contact: userId,
+    senderId: currentUser.value.uid,
   }
 
   if (!text.value)
